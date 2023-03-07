@@ -6,15 +6,16 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {RootNavigator} from './src/layouts';
+import { SafeAreaView, StatusBar } from 'react-native';
+import { useTheme } from './src/hooks/useTheme';
+import { RootNavigator } from './src/navigation';
 
 export default function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const { theme, scheme } = useTheme();
+  const isDarkMode = scheme === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: theme.primary,
   };
 
   return (

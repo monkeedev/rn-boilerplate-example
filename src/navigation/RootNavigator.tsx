@@ -1,6 +1,6 @@
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import {AuthNavigator, MainNavigator} from '.';
+import { AuthNavigator, MainNavigator } from '.';
 
 export const RootNavigator = () => {
   const isAuthorized = false;
