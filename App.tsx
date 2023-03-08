@@ -6,26 +6,28 @@
  */
 
 import React from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
-import { useTheme } from './src/hooks/useTheme';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import { useTheme } from './src/hooks';
 import { RootNavigator } from './src/navigation';
 
 export default function App(): JSX.Element {
   const { theme, scheme } = useTheme();
   const isDarkMode = scheme === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: theme.primary,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.primary }]}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+        backgroundColor={theme.primary}
       />
 
       <RootNavigator />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
