@@ -2,11 +2,11 @@ import { useTheme } from '@hooks';
 import { sizes } from '@theme';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { Props } from './types';
+import { TextProps } from './types';
 
-export const Metadata: React.FC<Props> = ({ content = 'Default metadata', style }) => {
+export const Metadata: React.FC<TextProps> = ({ content = 'Default metadata', style }) => {
   const { theme } = useTheme();
-  return <Text style={{ ...styles.text, color: theme.textPrimary, ...style }}>{content}</Text>;
+  return <Text style={[styles.text, { color: theme.textPrimary }, style]}>{content}</Text>;
 };
 
 const styles = StyleSheet.create({

@@ -2,9 +2,9 @@ import { useTheme } from '@hooks';
 import { sizes } from '@theme';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { Props } from './types';
+import { TextProps } from './types';
 
-export const Caption: React.FC<Props> = ({ content = 'Default caption', style }) => {
+export const Caption: React.FC<TextProps> = ({ content = 'Default caption', style }) => {
   const { theme } = useTheme();
   return (
     <Text

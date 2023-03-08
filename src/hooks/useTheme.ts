@@ -1,6 +1,6 @@
+import { colors } from '@theme';
 import { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
-import { colors } from '../theme/colors';
 
 export const useTheme = () => {
   const scheme = useColorScheme();

@@ -1,4 +1,9 @@
-import { ColorScheme, NotificationColorScheme } from '../utils';
+import { DefaultColors, NotificationColorScheme, ThemeAdapter } from './types';
+
+const defaultColors: DefaultColors = {
+  white: '#fff',
+  black: '#000',
+};
 
 const notifications: NotificationColorScheme = {
   success: '#61D163',
@@ -7,7 +12,7 @@ const notifications: NotificationColorScheme = {
   info: '#2196f3',
 };
 
-export const colors: { [scheme: string]: ColorScheme & NotificationColorScheme } = {
+const colors: { [scheme: string]: ThemeAdapter } = {
   dark: {
     primary: '#16181D',
     secondary: '#6FC371',
@@ -16,6 +21,7 @@ export const colors: { [scheme: string]: ColorScheme & NotificationColorScheme }
     link: '#FFFFFF',
     border: '#3d4457',
     ...notifications,
+    ...defaultColors,
   },
   light: {
     primary: '#F2F2F3',
@@ -25,5 +31,8 @@ export const colors: { [scheme: string]: ColorScheme & NotificationColorScheme }
     link: '#0277bd',
     border: '#C4C9D4',
     ...notifications,
+    ...defaultColors,
   },
 };
+
+export { colors, defaultColors };

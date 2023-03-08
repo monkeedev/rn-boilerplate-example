@@ -1,6 +1,6 @@
-import { Caption } from '@components/texts';
+import { defaultColors, sizes } from '@theme';
 import React, { ForwardedRef, useCallback, useImperativeHandle, useState } from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback } from 'react-native';
 import Animated, {
   interpolate,
   interpolateColor,
@@ -83,7 +83,7 @@ const Component: React.FC<Props> = ({ onOpen, onHide, forwardedRef }) => {
   return (
     <TouchableWithoutFeedback onPress={hideNotification}>
       <Animated.View style={[styles.container, rStyles]}>
-        <Caption content={notification.message} style={styles.text} />
+        <Text style={styles.text}>{notification.message}</Text>
       </Animated.View>
     </TouchableWithoutFeedback>
   );
@@ -109,7 +109,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   text: {
-    marginBottom: 0,
+    fontSize: sizes.r,
+    letterSpacing: 0.4,
+    lineHeight: sizes.r * 1.25,
     fontWeight: '500',
+    color: defaultColors.white,
   },
 });
