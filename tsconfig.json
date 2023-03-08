@@ -1,3 +1,17 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "suppressImplicitAnyIndexErrors": true,
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "paths": {
+      "*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@redux/*": ["src/redux/*"],
+      "@theme/*": ["src/theme/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
+    }
+  }
 }
