@@ -5,6 +5,8 @@
  * @format
  */
 
+import { Notification } from '@components/common/notification';
+import { notificationRef } from '@utils';
 import React from 'react';
 import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { useTheme } from './src/hooks';
@@ -22,6 +24,8 @@ export default function App(): JSX.Element {
       />
 
       <RootNavigator />
+
+      <Notification ref={notificationRef} />
     </SafeAreaView>
   );
 }

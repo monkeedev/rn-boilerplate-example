@@ -1,7 +1,7 @@
 const ContainerStyles = {
   container: {
-    padding: 16,
-    flex: 1,
+    // padding: 16,
+    // flex: 1,
   },
 };
 

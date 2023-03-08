@@ -6,7 +6,15 @@ import { Props } from './types';
 
 export const Caption: React.FC<Props> = ({ content = 'Default caption', style }) => {
   const { theme } = useTheme();
-  return <Text style={{ ...styles.text, color: theme.textPrimary, ...style }}>{content}</Text>;
+  return (
+    <Text
+      numberOfLines={1}
+      lineBreakMode="clip"
+      style={[styles.text, { color: theme.textPrimary }, style]}
+    >
+      {content}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

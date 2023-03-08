@@ -1,6 +1,6 @@
-import { TextStyle } from 'react-native';
+import { StyleProp, TextStyle } from 'react-native';
 
 export type Props = {
   content?: string;
-  style?: TextStyle;
+  style?: TextStyle | StyleProp<TextStyle>;
 };
