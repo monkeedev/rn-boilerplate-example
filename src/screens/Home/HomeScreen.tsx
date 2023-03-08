@@ -1,17 +1,15 @@
 import { DefaultContainer } from '@components/containers';
+import { Caption, Metadata, Paragraph, Subtitle, Title } from '@components/texts';
 import React from 'react';
-import { Text } from 'react-native';
 
 export const HomeScreen = () => {
   return (
     <DefaultContainer>
-      <Text>HomeScreen</Text>
-      <Text>HomeScreen</Text>
-      <Text>HomeScreen</Text>
-      <Text>HomeScreen</Text>
-      <Text>HomeScreen</Text>
-      <Text>HomeScreen</Text>
-      <Text>HomeScreen</Text>
+      <Title />
+      <Subtitle />
+      <Paragraph />
+      <Caption />
+      <Metadata />
     </DefaultContainer>
   );
 };
