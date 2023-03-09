@@ -10,6 +10,6 @@ export type RadiobuttonDataItem = Pick<RadiobuttonData, 'title'> & {
 
 export type RadiobuttonGroupProps = {
   data: RadiobuttonData[];
-  onItemPress: () => void;
+  onItemPress: (ids: string[]) => void;
   withMultipleChoice?: boolean;
 };

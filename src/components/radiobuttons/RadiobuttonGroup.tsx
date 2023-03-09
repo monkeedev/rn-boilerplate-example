@@ -44,17 +44,32 @@ const Item: React.FC<RadiobuttonDataItem> = ({ title, onPress, isChecked }) => {
   );
 };
 
-export const RadiobuttonGroup: React.FC<RadiobuttonGroupProps> = ({ data, withMultipleChoice }) => {
+export const RadiobuttonGroup: React.FC<RadiobuttonGroupProps> = ({
+  data,
+  withMultipleChoice,
+  onItemPress,
+}) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const handleOnPress = (id: string) => {
+    let data: string[] = [];
+
     if (!withMultipleChoice) {
-      selectedIds.includes(id) ? setSelectedIds([]) : setSelectedIds([id]);
+      if (selectedIds.includes(id)) {
+        data = [];
+      } else {
+        data = [id];
+      }
     } else {
-      selectedIds.includes(id)
-        ? setSelectedIds((prev) => prev.filter((i) => i !== id))
-        : setSelectedIds((prev) => [...prev, id]);
+      if (selectedIds.includes(id)) {
+        data = selectedIds.filter((i) => i !== id);
+      } else {
+        data = [...selectedIds, id];
+      }
     }
+
+    setSelectedIds(data);
+    onItemPress(data);
   };
 
   return (

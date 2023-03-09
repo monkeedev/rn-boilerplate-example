@@ -92,7 +92,10 @@ export const HomeScreen = () => {
       <SwitcherCheckbox label="Checkbox" onPress={() => console.log('foo')} />
 
       {/* radiobuttons */}
-      <RadiobuttonGroup data={RADIOBUTTON_GROUP_DATA} />
+      <RadiobuttonGroup
+        data={RADIOBUTTON_GROUP_DATA}
+        onItemPress={(id: string[]) => console.log(id)}
+      />
     </PageContainer>
   );
 };
