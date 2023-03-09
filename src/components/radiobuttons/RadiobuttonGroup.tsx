@@ -23,9 +23,9 @@ const Item: React.FC<RadiobuttonDataItem> = ({ title, onPress, isChecked }) => {
     backgroundColor: interpolateColor(rIsChecked.value, [0, 1], [theme.border, theme.secondary]),
   }));
 
-  const rTextStyles = useAnimatedStyle(() => ({
-    color: interpolateColor(rIsChecked.value, [0, 1], [theme.textSecondary, theme.white]),
-  }));
+  const localStyles = {
+    text: { color: theme.textPrimary },
+  };
 
   useAnimatedReaction(
     () => isChecked,
@@ -38,7 +38,7 @@ const Item: React.FC<RadiobuttonDataItem> = ({ title, onPress, isChecked }) => {
   return (
     <Pressable onPress={onPress}>
       <Animated.View style={[styles.itemContainer, rContainerStyles]}>
-        <Animated.Text style={[styles.itemText, rTextStyles]}>{title}</Animated.Text>
+        <Animated.Text style={[styles.itemText, localStyles.text]}>{title}</Animated.Text>
       </Animated.View>
     </Pressable>
   );
