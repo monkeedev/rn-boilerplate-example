@@ -1,9 +1,10 @@
 import { DefaultButton } from '@components/buttons';
+import { DefaultCheckbox, SwitcherCheckbox } from '@components/checkboxes';
 import { DefaultContainer, PageContainer, RowContainer } from '@components/containers';
 import { Caption, Metadata, Paragraph, Subtitle, Title } from '@components/texts';
-import { useTheme } from '@hooks';
-import { sizes } from '@theme';
-import { notificationRef } from '@utils';
+import { useTheme } from '@hooks/index';
+import { sizes } from '@theme/typography';
+import { notificationRef } from '@utils/constants';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -45,18 +46,34 @@ export const HomeScreen = () => {
 
         <RowContainer style={styles.buttonsRowContainer}>
           <DefaultButton onPress={() => console.log('press')}>
-            <Caption style={[styles.text, { color: theme.primary }]} content="Default button" />
+            <Caption
+              singleLine
+              style={[styles.text, { color: theme.primary }]}
+              content="Default button"
+            />
           </DefaultButton>
           <Separator />
           <DefaultButton onPress={() => console.log('press')}>
-            <Caption style={[styles.text, { color: theme.primary }]} content="Default button" />
+            <Caption
+              singleLine
+              style={[styles.text, { color: theme.primary }]}
+              content="Default button"
+            />
           </DefaultButton>
           <Separator />
           <DefaultButton onPress={() => console.log('press')}>
-            <Caption style={[styles.text, { color: theme.primary }]} content="Default button" />
+            <Caption
+              singleLine
+              style={[styles.text, { color: theme.primary }]}
+              content="Default button"
+            />
           </DefaultButton>
         </RowContainer>
       </DefaultContainer>
+
+      {/* checkboxes */}
+      <DefaultCheckbox label="Checkbox" onPress={() => console.log('foo')} />
+      <SwitcherCheckbox label="Checkbox" onPress={() => console.log('foo')} />
     </PageContainer>
   );
 };

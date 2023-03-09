@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
     fontSize: sizes.xl,
     fontWeight: '700',
     lineHeight: sizes.xl + 5,
-    marginBottom: 20,
+    // marginBottom: 20,
   },
 });
