@@ -1,19 +1,18 @@
 import { useTheme } from '@hooks';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import { ButtonProps } from './types';
 
 export const DefaultButton: React.FC<ButtonProps> = ({ onPress, containerStyles, children }) => {
   const { theme } = useTheme();
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.75}
+    <Pressable
       onPress={onPress}
       style={[styles.container, { backgroundColor: theme.info }, containerStyles]}
     >
       {children}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

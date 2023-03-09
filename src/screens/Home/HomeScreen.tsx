@@ -1,6 +1,7 @@
 import { DefaultButton } from '@components/buttons';
 import { DefaultCheckbox, SwitcherCheckbox } from '@components/checkboxes';
 import { DefaultContainer, PageContainer, RowContainer } from '@components/containers';
+import { RadiobuttonGroup } from '@components/radiobuttons';
 import { Caption, Metadata, Paragraph, Subtitle, Title } from '@components/texts';
 import { useTheme } from '@hooks/index';
 import { sizes } from '@theme/typography';
@@ -10,6 +11,21 @@ import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Separator = () => <View style={styles.separator} />;
+
+const RADIOBUTTON_GROUP_DATA = [
+  {
+    key: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+  },
+  {
+    key: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+  },
+  {
+    key: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+  },
+];
 
 export const HomeScreen = () => {
   const { theme } = useTheme();
@@ -74,13 +90,15 @@ export const HomeScreen = () => {
       {/* checkboxes */}
       <DefaultCheckbox label="Checkbox" onPress={() => console.log('foo')} />
       <SwitcherCheckbox label="Checkbox" onPress={() => console.log('foo')} />
+
+      {/* radiobuttons */}
+      <RadiobuttonGroup data={RADIOBUTTON_GROUP_DATA} />
     </PageContainer>
   );
 };
 
 const styles = StyleSheet.create({
   text: {
-    marginBottom: 0,
     fontWeight: '600',
   },
   buttonsRowContainer: {

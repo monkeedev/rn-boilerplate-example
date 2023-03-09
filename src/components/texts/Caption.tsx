@@ -27,6 +27,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     lineHeight: sizes.r * 1.25,
     flexShrink: 1,
-    // marginBottom: 12,
   },
 });

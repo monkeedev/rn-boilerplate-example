@@ -1,8 +1,9 @@
 import { RowContainer } from '@components/containers';
 import { Caption } from '@components/texts';
 import { useTheme } from '@hooks';
+import { defaultSpringConfig } from '@utils';
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { Pressable, StyleSheet, ViewStyle } from 'react-native';
 import Animated, {
   interpolateColor,
   useAnimatedReaction,
@@ -11,7 +12,6 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { defaultSpringConfig } from './helpers';
 import { CheckboxProps } from './types';
 
 export const DefaultCheckbox: React.FC<CheckboxProps> = ({
@@ -59,7 +59,7 @@ export const DefaultCheckbox: React.FC<CheckboxProps> = ({
   );
 
   return (
-    <TouchableOpacity onPress={handlePress} activeOpacity={0.75}>
+    <Pressable onPress={handlePress}>
       <RowContainer style={{ ...styles.container, ...localStyles.container }}>
         <Animated.View
           style={[styles.checkboxContainer, localStyles.checkbox, rCheckmarkContainerStyles]}
@@ -70,7 +70,7 @@ export const DefaultCheckbox: React.FC<CheckboxProps> = ({
         </Animated.View>
         <Caption content={label} />
       </RowContainer>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

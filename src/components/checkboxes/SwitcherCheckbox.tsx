@@ -2,8 +2,9 @@ import { RowContainer } from '@components/containers';
 import { Caption } from '@components/texts';
 import { useTheme } from '@hooks';
 import { defaultColors } from '@theme';
+import { defaultSpringConfig } from '@utils';
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { Pressable, StyleSheet, ViewStyle } from 'react-native';
 import Animated, {
   interpolate,
   interpolateColor,
@@ -12,7 +13,6 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { defaultSpringConfig } from './helpers';
 import { CheckboxProps } from './types';
 
 const DEFAULT_HEIGHT = 32;
@@ -59,7 +59,7 @@ export const SwitcherCheckbox: React.FC<CheckboxProps> = ({
   );
 
   return (
-    <TouchableOpacity onPress={handlePress} activeOpacity={0.75}>
+    <Pressable onPress={handlePress}>
       <RowContainer style={{ ...styles.container, ...localStyles.checkbox }}>
         <Animated.View
           style={[styles.checkboxContainer, localStyles.circle, rCheckmarkContainerStyles]}
@@ -68,7 +68,7 @@ export const SwitcherCheckbox: React.FC<CheckboxProps> = ({
         </Animated.View>
         <Caption content={label} />
       </RowContainer>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
