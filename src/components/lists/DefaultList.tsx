@@ -1,12 +1,38 @@
+import { Caption } from '@components/texts';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { ListItem, ListProps } from './types';
 
-export const DefaultList = () => {
+const Separator = () => <View style={styles.itemSeparator} />;
+
+const Item: React.FC<ListItem> = ({ title }) => {
   return (
-    <View>
-      <Text>DefaultList</Text>
+    <View style={styles.itemContainer}>
+      <Caption content={title} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+export const DefaultList: React.FC<ListProps> = ({ data }) => {
+  return (
+    <FlatList
+      data={data}
+      renderItem={({ item }) => <Item title={item.title} />}
+      keyExtractor={(item) => item.key}
+      ItemSeparatorComponent={Separator}
+    />
+  );
+};
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    borderRadius: 4,
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+  itemSeparator: {
+    height: 8,
+  },
+});
