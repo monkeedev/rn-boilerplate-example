@@ -4,6 +4,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
+    "types": ["node"],
     "paths": {
       "@*": ["src/*"],
       "@assets/*": ["src/assets/*"],

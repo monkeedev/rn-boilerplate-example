@@ -1,7 +1,6 @@
 import React from 'react';
 
 type InputTypes = 'default' | 'email' | 'password' | 'phone' | 'numeric';
-// default - numeric - email-address - phone-pad
 
 export enum KeyboardTypeEnum {
   default = 'default',
@@ -11,14 +10,23 @@ export enum KeyboardTypeEnum {
   numeric = 'numeric',
 }
 
+export type InputHandlers = {
+  clear: () => void;
+  showError: (error: string) => void;
+};
+
 export type InputProps = {
   onChangeText: (input: string) => void;
+  onBlur?: (input: string) => void;
   placeholder?: string;
   defaultValue?: string;
   type?: InputTypes;
-  withMultiline?: boolean;
   isDisabled?: boolean;
   maxSymbols?: number;
+  withMultiline?: boolean;
+  withErrorMessage?: boolean;
   LeftIconComponent?: React.ReactElement;
   RightIconComponent?: React.ReactElement;
+  ref?: React.ForwardedRef<InputHandlers>;
+  forwardedRef?: React.ForwardedRef<InputHandlers>;
 };

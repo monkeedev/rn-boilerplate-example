@@ -1,0 +1,16 @@
+/**
+ * simple email validation
+ *
+ * @link https://stackoverflow.com/a/46181/17143867
+ * @param {string} email
+ * @returns {boolean} is email correct or incorrect
+ */
+export const validateEmail = (email: string) => {
+  const res = String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+
+  return !!res?.length;
+};

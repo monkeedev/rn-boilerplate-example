@@ -14,3 +14,10 @@ export interface NotificationState {
 export type NotificationHandlers = {
   open: (msg: string, type?: NotificationTypes) => void;
 };
+
+export interface NotificationProps {
+  onOpen?: () => void;
+  onHide?: () => void;
+  ref?: React.ForwardedRef<NotificationHandlers>;
+  forwardedRef?: React.ForwardedRef<NotificationHandlers>;
+}
