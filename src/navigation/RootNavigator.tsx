@@ -1,13 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { AuthNavigator, MainNavigator } from '.';
+import { MainNavigator } from './MainNavigator';
 
 export const RootNavigator = () => {
-  const isAuthorized = true;
-
   return (
     <NavigationContainer>
-      {!isAuthorized ? <AuthNavigator /> : <MainNavigator />}
+      <MainNavigator />
     </NavigationContainer>
   );
 };
