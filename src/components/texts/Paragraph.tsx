@@ -15,6 +15,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     letterSpacing: 0.4,
     lineHeight: sizes.m * 1.35,
-    marginBottom: 14,
   },
 });

@@ -13,21 +13,15 @@ import Animated, {
 import {
   NotificationColors,
   NotificationHandlers,
+  NotificationProps,
   NotificationState,
   NotificationTypes,
 } from './types';
 
-interface Props {
-  onOpen?: () => void;
-  onHide?: () => void;
-  ref?: React.ForwardedRef<NotificationHandlers>;
-  forwardedRef?: React.ForwardedRef<NotificationHandlers>;
-}
-
 const HEIGHT = 92;
 const DURATION = 250;
 
-const Component: React.FC<Props> = ({ onOpen, onHide, forwardedRef }) => {
+const Component: React.FC<NotificationProps> = ({ onOpen, onHide, forwardedRef }) => {
   const isOpened = useSharedValue(0);
 
   const [notification, setNotification] = useState<NotificationState>({
@@ -89,10 +83,8 @@ const Component: React.FC<Props> = ({ onOpen, onHide, forwardedRef }) => {
   );
 };
 
-export const Notification: React.FC<Props> = React.forwardRef(
-  (props, ref: ForwardedRef<NotificationHandlers>) => {
-    return <Component {...props} forwardedRef={ref} />;
-  }
+export const Notification: React.FC<NotificationProps> = React.forwardRef(
+  (props, ref: ForwardedRef<NotificationHandlers>) => <Component {...props} forwardedRef={ref} />
 );
 
 const styles = StyleSheet.create({

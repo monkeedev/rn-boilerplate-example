@@ -15,6 +15,5 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     letterSpacing: 0.15,
     lineHeight: sizes.l * 1.45,
-    marginBottom: 15,
   },
 });

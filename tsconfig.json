@@ -4,8 +4,9 @@
     "suppressImplicitAnyIndexErrors": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
+    "types": ["node"],
     "paths": {
-      "*": ["src/*"],
+      "@*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@redux/*": ["src/redux/*"],

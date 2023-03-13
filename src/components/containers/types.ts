@@ -1,6 +1,7 @@
-import { ViewStyle } from 'react-native';
+import { LayoutChangeEvent, ViewStyle } from 'react-native';
 
 export interface ContainerProps {
-  style?: ViewStyle;
+  style?: ViewStyle | ViewStyle[];
   children?: React.ReactElement | React.ReactElement[];
+  onLayout?: (e: LayoutChangeEvent) => void;
 }
