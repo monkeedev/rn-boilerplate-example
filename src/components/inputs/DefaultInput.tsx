@@ -23,6 +23,7 @@ const Component: React.FC<InputProps> = (props) => {
   const [rightIconWidth, setRightIconWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(props.type === 'password');
 
   const localStyles = {
     container: {
@@ -76,6 +77,9 @@ const Component: React.FC<InputProps> = (props) => {
           setError('');
         }, 3000);
       },
+      togglePassword: () => {
+        setIsPasswordVisible((prev) => !prev);
+      },
     }),
     []
   );
@@ -105,7 +109,7 @@ const Component: React.FC<InputProps> = (props) => {
           multiline={props.withMultiline}
           maxLength={props.maxSymbols}
           keyboardType={KeyboardTypeEnum[props.type ?? 'default']}
-          secureTextEntry={props.type === 'password'}
+          secureTextEntry={isPasswordVisible}
           ref={inputRef}
         />
         {props.RightIconComponent ? (

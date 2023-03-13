@@ -1,6 +1,5 @@
 import { PageContainer } from '@components/containers';
-import { DefaultInput } from '@components/inputs';
-import { EmailInput } from '@components/inputs/EmailInput';
+import { DefaultInput, EmailInput, PasswordInput } from '@components/inputs';
 import { InputHandlers } from '@components/inputs/types';
 import React from 'react';
 
@@ -10,7 +9,8 @@ export const HomeScreen = () => {
   return (
     <PageContainer>
       <EmailInput onChangeText={(v) => console.log('email', v)} />
-      <DefaultInput onChangeText={(v) => console.log(v)} ref={ref} />
+      <PasswordInput onChangeText={(v) => console.log('password', v)} />
+      <DefaultInput onChangeText={(v) => console.log('default', v)} ref={ref} />
     </PageContainer>
   );
 };

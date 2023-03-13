@@ -3,8 +3,6 @@ import { DefaultInput } from '.';
 import { validateEmail } from './helpers';
 import { InputHandlers, InputProps } from './types';
 
-// const REGEX = ''
-
 export const EmailInput: React.FC<InputProps> = (props) => {
   const inputRef = useRef<InputHandlers>();
   const valueRef = useRef('');

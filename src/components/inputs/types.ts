@@ -13,6 +13,7 @@ export enum KeyboardTypeEnum {
 export type InputHandlers = {
   clear: () => void;
   showError: (error: string) => void;
+  togglePassword: () => void;
 };
 
 export type InputProps = {
