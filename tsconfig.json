@@ -12,7 +12,8 @@
       "@redux/*": ["src/redux/*"],
       "@theme/*": ["src/theme/*"],
       "@utils/*": ["src/utils/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@screens/*": ["src/screens/*"]
     }
   }
 }

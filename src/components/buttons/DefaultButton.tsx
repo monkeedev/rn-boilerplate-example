@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     minHeight: 52,
+    maxHeight: 52,
     flexDirection: 'row',
     justifyContent: 'center',
   },
