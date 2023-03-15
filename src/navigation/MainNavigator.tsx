@@ -3,7 +3,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import { ExampleScreen } from '@screens/Example';
+import { HomeScreen } from '@screens/Home';
 import React from 'react';
 
 const MainStack = createNativeStackNavigator();
@@ -20,7 +20,7 @@ export const MainNavigator = () => {
 
   return (
     <MainStack.Navigator screenOptions={{ ...headerConfig }}>
-      <MainStack.Screen name="Example" component={ExampleScreen} />
+      <MainStack.Screen name="Home" component={HomeScreen} />
     </MainStack.Navigator>
   );
 };
