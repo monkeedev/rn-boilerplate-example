@@ -1,5 +1,6 @@
-// your root selectors placed here
-// example given down below:
+import { RootState } from './store';
 
-// import { RootState } from "./store";
-// const getSpecificStateFromStore = (state: RootState) => state.exampleReducer.exampleState
+export const getQuestionsFetchStatus = (state: RootState) => state.quiz.isLoading;
+export const getQuestionsFetchError = (state: RootState) => state.quiz.error;
+export const getQuestions = (state: RootState) => state.quiz.data.questions;
+export const getAnswers = (state: RootState) => state.quiz.data.answers;

@@ -3,13 +3,23 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import { ButtonProps } from './types';
 
-export const DefaultButton: React.FC<ButtonProps> = ({ onPress, containerStyles, children }) => {
+export const DefaultButton: React.FC<ButtonProps> = ({
+  onPress,
+  containerStyles,
+  children,
+  isDisabled,
+}) => {
   const { theme } = useTheme();
+
+  const localStyles = {
+    container: { backgroundColor: theme.info, opacity: isDisabled ? 0.5 : 1 },
+  };
 
   return (
     <Pressable
       onPress={onPress}
-      style={[styles.container, { backgroundColor: theme.info }, containerStyles]}
+      style={[styles.container, localStyles.container, containerStyles]}
+      disabled={isDisabled}
     >
       {children}
     </Pressable>

@@ -1,21 +1,40 @@
 import { DefaultButton } from '@components/buttons';
 import { PageContainer } from '@components/containers';
-import { Caption } from '@components/texts';
-import axios from 'axios';
-import React from 'react';
+import { Caption, Paragraph } from '@components/texts';
+import { MainNavigatorScreensParamList } from '@navigation/types';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { fetchQuestions } from '@redux/quiz/actions';
+import {
+  getQuestions,
+  getQuestionsFetchError,
+  getQuestionsFetchStatus,
+} from '@redux/rootSelectors';
+import { useAppDispatch, useAppSelector } from '@redux/store';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 
-const URL = 'https://opentdb.com/api.php?amount=10';
-
 export const HomeScreen = () => {
-  const handleRequest = async () => {
-    const res = await axios.get(URL);
+  const { navigate } = useNavigation<NavigationProp<MainNavigatorScreensParamList, 'Quiz'>>();
+  const dispatch = useAppDispatch();
 
-    console.log(res.data);
+  const isLoading = useAppSelector(getQuestionsFetchStatus);
+  const error = useAppSelector(getQuestionsFetchError);
+  const questions = useAppSelector(getQuestions);
+
+  const handleRequest = () => {
+    dispatch(fetchQuestions());
   };
+
+  useEffect(() => {
+    if (questions.length > 0) {
+      navigate('Quiz', { id: 0, question: questions[0] });
+    }
+  }, [questions]);
+
   return (
     <PageContainer style={styles.pageContainer}>
-      <DefaultButton onPress={handleRequest}>
+      {error && <Paragraph content={error} />}
+      <DefaultButton onPress={handleRequest} isDisabled={isLoading}>
         <Caption content="Generate questions" />
       </DefaultButton>
     </PageContainer>

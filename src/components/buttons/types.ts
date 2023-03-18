@@ -6,4 +6,5 @@ export type ButtonProps = {
   children: React.ReactElement | React.ReactElement[];
   containerStyles?: ViewStyle;
   textStyles?: TextStyle;
+  isDisabled?: boolean;
 };
