@@ -4,41 +4,66 @@ import { RadiobuttonGroup } from '@components/radiobuttons';
 import { Paragraph, Subtitle } from '@components/texts';
 import { MainNavigatorScreensParamList } from '@navigation/types';
 import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { quizSlice } from '@redux/quiz/slice';
 import { getQuestions } from '@redux/rootSelectors';
+// import {addToAnswers} from '@redux/quiz/actions';
 import { useAppDispatch, useAppSelector } from '@redux/store';
+import { Answer } from '@utils';
 import { parseString, shuffleArray } from '@utils/functions';
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 export const QuizScreen = () => {
-  const { setParams } = useNavigation<NavigationProp<MainNavigatorScreensParamList, 'Quiz'>>();
-
   const dispatch = useAppDispatch();
   const questions = useAppSelector(getQuestions);
 
+  const { setParams, navigate } =
+    useNavigation<NavigationProp<MainNavigatorScreensParamList, 'Quiz'>>();
   const { params } = useRoute<RouteProp<MainNavigatorScreensParamList, 'Quiz'>>();
   const { question, id } = params;
 
-  const answersRef = useRef();
+  const [userDidSelectSomething, setUserDidSelectSomething] = useState(false);
+
+  const answersRef = useRef<string[]>([]);
+  const questionsRef = useRef(new Map());
 
   const options = useMemo(() => {
-    return shuffleArray(
-      [...question.incorrect_answers, question.correct_answer].map((a, k) => ({
-        key: `Question_${id}_${k}`,
-        title: a,
-      }))
-    );
+    const arr = [...(question.incorrect_answers ?? []), question.correct_answer].map((a, k) => ({
+      key: `Question_${id}_${k}`,
+      title: parseString(a),
+    }));
+
+    arr.forEach((i) => {
+      questionsRef.current.set(i.key, i.title);
+    });
+
+    return shuffleArray(arr);
   }, [id]);
 
-  const chooseItem = (ids: any) => {
+  const chooseItem = (ids: string[]) => {
     answersRef.current = ids;
-
-    // console.log(answersRef.current);
+    setUserDidSelectSomething(ids.length !== 0);
   };
 
   const proceedToTheNextQuestion = () => {
+    setUserDidSelectSomething(false);
+
+    if (answersRef.current.length > 0) {
+      const usersAnswer: Answer = answersRef.current
+        .map((a) => questionsRef.current.get(a))
+        .map((i) => ({
+          id: `Question_${id}`,
+          question: parseString(params.question.question),
+          correct: parseString(question.correct_answer),
+          usersAnswer: i,
+        }))[0];
+
+      dispatch(quizSlice.actions.addToAnswers(usersAnswer));
+      answersRef.current = [];
+    }
+
     if (id === questions.length - 1) {
-      // redirect to results
+      navigate('Results', {});
     } else {
       setParams({ id: id + 1, question: questions[id + 1] });
     }
@@ -48,12 +73,8 @@ export const QuizScreen = () => {
     <PageContainer>
       <DefaultContainer style={styles.container}>
         <Subtitle content={parseString(params.question.question)} style={styles.header} />
-        <RadiobuttonGroup
-          data={options}
-          onItemPress={chooseItem}
-          withMultipleChoice={question.type === 'multiple'}
-        />
-        <DefaultButton onPress={proceedToTheNextQuestion}>
+        <RadiobuttonGroup data={options} onItemPress={chooseItem} />
+        <DefaultButton onPress={proceedToTheNextQuestion} isDisabled={!userDidSelectSomething}>
           <Paragraph content="Next" />
         </DefaultButton>
       </DefaultContainer>

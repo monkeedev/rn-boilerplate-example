@@ -6,4 +6,5 @@ export type MainNavigatorScreensParamList = {
     id: number;
     question: Question;
   };
+  Results: Record<string, never>;
 };

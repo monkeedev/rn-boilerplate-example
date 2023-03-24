@@ -1,10 +1,7 @@
-type ListItemData = {
-  key: string;
-  title: string;
-};
+import { Answer } from '@utils';
 
-export type ListItem = Pick<ListItemData, 'title'>;
+export type ListItem = Omit<Answer, 'id'>;
 
 export type ListProps = {
-  data: ListItemData[];
+  data: Answer[];
 };

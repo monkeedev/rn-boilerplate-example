@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Answer, Question } from '@utils';
 import { fetchQuestions } from './actions';
-import { Question, QuizState } from './types';
+import { QuizState } from './types';
 
 const initialState: QuizState = {
   data: {
     questions: [],
-    answers: [],
+    answers: {},
   },
   isLoading: false,
   error: '',
@@ -15,8 +16,8 @@ export const quizSlice = createSlice({
   name: 'quiz',
   initialState,
   reducers: {
-    addToAnswers: (state, action: PayloadAction<Question>) => {
-      state.data.answers.push(action.payload);
+    addToAnswers: (state, action: PayloadAction<Answer>) => {
+      state.data.answers[action.payload.id] = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -26,6 +27,7 @@ export const quizSlice = createSlice({
       })
       .addCase(fetchQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
         state.isLoading = false;
+        state.data.answers = {};
         state.data.questions = action.payload ?? [];
       })
       .addCase(fetchQuestions.rejected, (state, action: PayloadAction<string | unknown>) => {

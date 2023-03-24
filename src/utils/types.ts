@@ -6,3 +6,10 @@ export type Question = {
   question: string;
   type: 'multiple' | boolean;
 };
+
+export type Answer = {
+  id: string;
+  question: string;
+  correct: string | string[] | boolean;
+  usersAnswer: string[] | boolean;
+};

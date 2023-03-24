@@ -35,4 +35,4 @@ const colors: { [scheme: string]: ThemeAdapter } = {
   },
 };
 
-export { colors, defaultColors };
+export { colors, defaultColors, notifications };
