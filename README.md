@@ -1,3 +1,3 @@
-# rn-boilerplate
+# rn-boilerplate-example
 
-More info soon 🙌
+Example app with usage of [RNBoilerplate](https://github.com/monkeedev/rn-boilerplate)
