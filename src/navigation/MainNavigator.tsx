@@ -5,8 +5,10 @@ import {
 } from '@react-navigation/native-stack';
 import { HomeScreen } from '@screens/Home';
 import { QuizScreen } from '@screens/Quiz';
+import { ProgressBar } from '@screens/Quiz/Components';
 import { ResultsScreen } from '@screens/Results';
 import React from 'react';
+import { BackButton } from './Components';
 
 const MainStack = createNativeStackNavigator();
 
@@ -33,9 +35,11 @@ export const MainNavigator = () => {
       <MainStack.Screen
         name="Quiz"
         component={QuizScreen}
-        options={({ route }) => ({
+        options={({ route }: { route: any }) => ({
           ...quizHeaderConfig,
           headerTitle: `Question ${route.params.id + 1}`,
+          headerRight: () => <ProgressBar />,
+          headerLeft: () => <BackButton id={route.params.id} />,
         })}
       />
       <MainStack.Screen name="Results" component={ResultsScreen} />

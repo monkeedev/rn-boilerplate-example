@@ -5,17 +5,17 @@ import { Paragraph, Subtitle } from '@components/texts';
 import { MainNavigatorScreensParamList } from '@navigation/types';
 import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { quizSlice } from '@redux/quiz/slice';
-import { getQuestions } from '@redux/rootSelectors';
-// import {addToAnswers} from '@redux/quiz/actions';
+import { getAnswers, getQuestions } from '@redux/rootSelectors';
 import { useAppDispatch, useAppSelector } from '@redux/store';
 import { Answer } from '@utils';
 import { parseString, shuffleArray } from '@utils/functions';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 export const QuizScreen = () => {
   const dispatch = useAppDispatch();
   const questions = useAppSelector(getQuestions);
+  const answers = useAppSelector(getAnswers);
 
   const { setParams, navigate } =
     useNavigation<NavigationProp<MainNavigatorScreensParamList, 'Quiz'>>();
@@ -48,7 +48,8 @@ export const QuizScreen = () => {
   const proceedToTheNextQuestion = () => {
     setUserDidSelectSomething(false);
 
-    if (answersRef.current.length > 0) {
+    // transform user's answer id to text answer
+    if (answersRef.current?.length > 0) {
       const usersAnswer: Answer = answersRef.current
         .map((a) => questionsRef.current.get(a))
         .map((i) => ({
@@ -62,12 +63,17 @@ export const QuizScreen = () => {
       answersRef.current = [];
     }
 
-    if (id === questions.length - 1) {
-      navigate('Results', {});
-    } else {
-      setParams({ id: id + 1, question: questions[id + 1] });
-    }
+    if (id === questions.length - 1) navigate('Results', {});
+    else setParams({ id: id + 1, question: questions[id + 1] });
   };
+
+  useEffect(() => {
+    if (params.id < Object.keys(answers).length) {
+      const answer = answers[`Question_${params.id}`];
+      const previouslyChosenId = options.find((i) => i.title === answer.usersAnswer).key;
+      chooseItem(previouslyChosenId);
+    }
+  }, [id, answers]);
 
   return (
     <PageContainer>

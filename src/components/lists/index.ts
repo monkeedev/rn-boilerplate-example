@@ -1,1 +1,1 @@
-export * from './DefaultList';
+export * from './ResultsList';

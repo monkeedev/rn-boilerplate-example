@@ -1,6 +1,6 @@
 import { DefaultButton } from '@components/buttons';
 import { PageContainer } from '@components/containers';
-import { Caption, Paragraph } from '@components/texts';
+import { Caption, Paragraph, Title } from '@components/texts';
 import { MainNavigatorScreensParamList } from '@navigation/types';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { fetchQuestions } from '@redux/quiz/actions';
@@ -31,11 +31,22 @@ export const HomeScreen = () => {
     }
   }, [questions]);
 
+  if (error)
+    return (
+      <PageContainer style={styles.pageContainer}>
+        <Paragraph content={error} />
+      </PageContainer>
+    );
+
   return (
     <PageContainer style={styles.pageContainer}>
-      {error && <Paragraph content={error} />}
+      <Title content="Quiz game" />
+      <Caption
+        content="You will fetch 10 questions about anything and in the end you'll receive your results"
+        style={styles.description}
+      />
       <DefaultButton onPress={handleRequest} isDisabled={isLoading}>
-        <Caption content="Generate questions" />
+        <Caption content="Let's start 🙌" />
       </DefaultButton>
     </PageContainer>
   );
@@ -43,6 +54,12 @@ export const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   pageContainer: {
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  description: {
+    textAlign: 'center',
+    marginTop: 16,
+    marginBottom: 32,
   },
 });

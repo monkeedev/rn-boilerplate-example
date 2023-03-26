@@ -8,21 +8,34 @@ import { useAppDispatch } from '@redux/store';
 import { notifications } from '@theme';
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { ListItem, ListProps } from './types';
 
 const Separator = () => <View style={styles.itemSeparator} />;
 
+const ANSWER_ICON = {
+  true: { name: 'check', color: notifications.success },
+  false: { name: 'remove', color: notifications.error },
+};
+
 const Item: React.FC<ListItem> = ({ question, usersAnswer, correct }) => {
+  const isCorrect = usersAnswer === correct;
+
   return (
     <View style={styles.itemContainer}>
       <Paragraph content={question} />
-      <Caption content={`Correct: ${correct}`} />
-      <Caption content={`Your answer: ${usersAnswer}`} />
+      <RowContainer style={styles.itemInnerContainer}>
+        <View>
+          <Caption content={`Correct: ${correct}`} />
+          <Caption content={`Your answer: ${usersAnswer}`} />
+        </View>
+        <Icon {...ANSWER_ICON[`${isCorrect}`]} size={24} />
+      </RowContainer>
     </View>
   );
 };
 
-export const DefaultList: React.FC<ListProps> = ({ data }) => {
+export const ResultsList: React.FC<ListProps> = ({ data }) => {
   const { navigate, reset } =
     useNavigation<NavigationProp<MainNavigatorScreensParamList, 'Results'>>();
 
@@ -36,9 +49,19 @@ export const DefaultList: React.FC<ListProps> = ({ data }) => {
     });
   };
 
-  const exit = async () => {
-    navigate('Home', {});
-  };
+  const exit = async () => navigate('Home', {});
+
+  const FooterComponent = () => (
+    <RowContainer>
+      <DefaultButton onPress={restart}>
+        <Paragraph content="Restart" />
+      </DefaultButton>
+      <View style={styles.buttonSeparator} />
+      <DefaultButton onPress={exit} containerStyles={styles.exitButton}>
+        <Paragraph content="Go home" />
+      </DefaultButton>
+    </RowContainer>
+  );
 
   return (
     <FlatList
@@ -47,18 +70,8 @@ export const DefaultList: React.FC<ListProps> = ({ data }) => {
       keyExtractor={(item) => item.id}
       ItemSeparatorComponent={Separator}
       showsVerticalScrollIndicator={false}
-      ListFooterComponent={
-        <RowContainer>
-          <DefaultButton onPress={restart}>
-            <Paragraph content="Restart" />
-          </DefaultButton>
-          <View style={styles.buttonSeparator} />
-          <DefaultButton onPress={exit} containerStyles={styles.exitButton}>
-            <Paragraph content="Go home" />
-          </DefaultButton>
-        </RowContainer>
-      }
       ListFooterComponentStyle={styles.footerContainer}
+      ListFooterComponent={FooterComponent}
     />
   );
 };
@@ -81,5 +94,9 @@ const styles = StyleSheet.create({
   },
   exitButton: {
     backgroundColor: notifications.error,
+  },
+  itemInnerContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

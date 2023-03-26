@@ -1,5 +1,5 @@
 import { DefaultContainer, PageContainer } from '@components/containers';
-import { DefaultList } from '@components/lists';
+import { ResultsList } from '@components/lists';
 import { Subtitle } from '@components/texts';
 import { getAnswers } from '@redux/rootSelectors';
 import { useAppSelector } from '@redux/store';
@@ -14,7 +14,7 @@ export const ResultsScreen = () => {
     <PageContainer>
       <DefaultContainer>
         <Subtitle content="It is time for results!" />
-        <DefaultList data={results} />
+        <ResultsList data={results} />
       </DefaultContainer>
     </PageContainer>
   );
